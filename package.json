@@ -1,5 +1,5 @@
 {
-  "name": "react-js-cron",
+  "name": "react-vite-cron",
   "version": "1.3.1",
   "description": "A React cron editor with antd inspired by jqCron",
   "author": "Xavier Rutayisire <xavier.rutayisire@gmail.com> (https://github.com/xrutayisire/)",
@@ -19,23 +19,19 @@
     "schedule",
     "parser"
   ],
-  "homepage": "https://github.com/xrutayisire/react-js-cron#readme",
+  "homepage": "https://github.com/codrin-iftimie/react-js-cron#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xrutayisire/react-js-cron.git"
+    "url": "git+https://github.com/codrin-iftimie/react-js-cron.git"
   },
   "bugs": {
-    "url": "https://github.com/xrutayisire/react-js-cron/issues"
+    "url": "https://github.com/codrin-iftimie/react-js-cron/issues"
   },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/cjs/index.d.ts",
   "scripts": {
-    "build": "del dist && yarn build:babel && yarn build:types",
-    "build:babel": "concurrently \"yarn build:babel:esm\" \"yarn build:babel:cjs\"",
-    "build:babel:cjs": "BABEL_ENV=cjs babel --extensions \".ts,.tsx\" --copy-files src --out-dir dist/cjs --presets=@babel/env",
-    "build:babel:esm": "BABEL_ENV=esm babel --extensions \".ts,.tsx\" --copy-files src --out-dir dist/esm",
-    "build:types": "tsc",
+    "build": "rollup -c",
     "storybook": "start-storybook -p 9009",
     "build-storybook": "build-storybook",
     "lint": "eslint 'src/**/*.ts?(x)'",
@@ -51,6 +47,10 @@
     "@babel/cli": "7.16.0",
     "@babel/plugin-proposal-export-default-from": "7.16.0",
     "@babel/plugin-transform-typescript": "7.16.1",
+    "@rollup/plugin-typescript": "^8.3.1",
+    "@rollup/plugin-commonjs": "^21.0.2",
+    "@rollup/plugin-node-resolve": "^13.1.3",
+    "rollup-plugin-css-only": "^3.1.0",
     "@storybook/addon-docs": "6.4.9",
     "@storybook/addons": "6.4.9",
     "@storybook/preset-create-react-app": "3.2.0",
@@ -74,6 +74,10 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-scripts": "4.0.3",
-    "typescript": "4.5.3"
+    "tslib": "^2.3.1",
+    "typescript": "^4.5.3"
+  },
+  "dependencies": {
+    "rollup": "^2.70.1"
   }
 }

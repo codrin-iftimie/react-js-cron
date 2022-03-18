@@ -1,5 +1,9 @@
 ## ReactJS Cron
 
+Forked from https://github.com/xrutayisire/react-js-cron
+All credits go to https://github.com/xrutayisire
+I only replaced his build system to work with vite
+
 > A React cron editor built with [antd](https://github.com/ant-design/ant-design)
 
 [![npm package](https://img.shields.io/npm/v/react-js-cron/latest.svg)](https://www.npmjs.com/package/react-js-cron)
