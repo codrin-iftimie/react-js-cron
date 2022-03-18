@@ -7,7 +7,7 @@
 /coverage
 
 # build
-/dist
+# /dist
 
 # storybook
 storybook-static
