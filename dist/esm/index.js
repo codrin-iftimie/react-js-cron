@@ -1,7 +1,5 @@
-import { jsxs, jsx, Fragment } from 'react/jsx-runtime';
-import { useRef, useEffect, useCallback, useMemo, useState } from 'react';
-import Button from 'antd/lib/button';
-import Select from 'antd/lib/select';
+import React, { useRef, useEffect, useCallback, useMemo, useState } from 'react';
+import { Select, Button } from 'antd';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -246,7 +244,9 @@ function Period(props) {
             _a["".concat(className, "-select-dropdown-period")] = !!className,
             _a));
     }, [className]);
-    return (jsxs("div", __assign({ className: internalClassName }, { children: [locale.prefixPeriod !== '' && (jsx("span", { children: locale.prefixPeriod || DEFAULT_LOCALE_EN.prefixPeriod }, void 0)), jsx(Select, { defaultValue: value, value: value, onChange: handleChange, options: options, className: selectClassName, dropdownClassName: dropdownClassName, disabled: disabled, showArrow: !readOnly, open: readOnly ? false : undefined }, JSON.stringify(locale))] }), void 0));
+    return (React.createElement("div", { className: internalClassName },
+        locale.prefixPeriod !== '' && (React.createElement("span", null, locale.prefixPeriod || DEFAULT_LOCALE_EN.prefixPeriod)),
+        React.createElement(Select, { key: JSON.stringify(locale), defaultValue: value, value: value, onChange: handleChange, options: options, className: selectClassName, dropdownClassName: dropdownClassName, disabled: disabled, showArrow: !readOnly, open: readOnly ? false : undefined })));
 }
 
 var SUPPORTED_SHORTCUTS = [
@@ -677,14 +677,14 @@ function CustomSelect(props) {
     var renderTag = useCallback(function (props) {
         var itemValue = props.value;
         if (!value || value[0] !== Number(itemValue)) {
-            return jsx(Fragment, {}, void 0);
+            return React.createElement(React.Fragment, null);
         }
         var parsedArray = parsePartArray(value, unit);
         var cronValue = partToString(parsedArray, unit, humanizeLabels, leadingZero, clockFormat);
         var testEveryValue = cronValue.match(/^\*\/([0-9]+),?/) || [];
-        return (jsx("div", { children: testEveryValue[1]
-                ? "".concat(locale.everyText || DEFAULT_LOCALE_EN.everyText, " ").concat(testEveryValue[1])
-                : cronValue }, void 0));
+        return (React.createElement("div", null, testEveryValue[1]
+            ? "".concat(locale.everyText || DEFAULT_LOCALE_EN.everyText, " ").concat(testEveryValue[1])
+            : cronValue));
     }, [value, localeJSON, humanizeLabels, leadingZero, clockFormat]);
     var simpleClick = useCallback(function (newValueOption) {
         var newValueOptions = Array.isArray(newValueOption)
@@ -803,13 +803,13 @@ function CustomSelect(props) {
             _a["".concat(className, "-select-dropdown-").concat(unit.type)] = !!className,
             _a));
     }, [className, grid, clockFormat, period]);
-    return (jsx(Select, __assign({ mode: 'multiple', allowClear: !readOnly, virtual: false, open: readOnly ? false : undefined, value: stringValue, onClear: onClear, tagRender: renderTag, className: internalClassName, dropdownClassName: dropdownClassNames, options: options, showSearch: false, showArrow: !readOnly, menuItemSelectedIcon: null, dropdownMatchSelectWidth: false, onSelect: onOptionClick, onDeselect: onOptionClick, disabled: disabled, dropdownAlign: (unit.type === 'minutes' || unit.type === 'hours') &&
+    return (React.createElement(Select, __assign({ mode: 'multiple', allowClear: !readOnly, virtual: false, open: readOnly ? false : undefined, value: stringValue, onClear: onClear, tagRender: renderTag, className: internalClassName, dropdownClassName: dropdownClassNames, options: options, showSearch: false, showArrow: !readOnly, menuItemSelectedIcon: null, dropdownMatchSelectWidth: false, onSelect: onOptionClick, onDeselect: onOptionClick, disabled: disabled, dropdownAlign: (unit.type === 'minutes' || unit.type === 'hours') &&
             period !== 'day' &&
             period !== 'hour'
             ? {
                 points: ['tr', 'br'],
             }
-            : undefined }, otherProps), void 0));
+            : undefined }, otherProps)));
 }
 
 function MonthDays(props) {
@@ -836,7 +836,9 @@ function MonthDays(props) {
     var displayMonthDays = !readOnly ||
         (value && value.length > 0) ||
         ((!value || value.length === 0) && (!weekDays || weekDays.length === 0));
-    return displayMonthDays ? (jsxs("div", __assign({ className: internalClassName }, { children: [locale.prefixMonthDays !== '' && (jsx("span", { children: locale.prefixMonthDays || DEFAULT_LOCALE_EN.prefixMonthDays }, void 0)), jsx(CustomSelect, { placeholder: placeholder, value: value, setValue: setValue, unit: UNITS[2], locale: locale, className: className, disabled: disabled, readOnly: readOnly, leadingZero: leadingZero, period: period, periodicityOnDoubleClick: periodicityOnDoubleClick }, void 0)] }), void 0)) : null;
+    return displayMonthDays ? (React.createElement("div", { className: internalClassName },
+        locale.prefixMonthDays !== '' && (React.createElement("span", null, locale.prefixMonthDays || DEFAULT_LOCALE_EN.prefixMonthDays)),
+        React.createElement(CustomSelect, { placeholder: placeholder, value: value, setValue: setValue, unit: UNITS[2], locale: locale, className: className, disabled: disabled, readOnly: readOnly, leadingZero: leadingZero, period: period, periodicityOnDoubleClick: periodicityOnDoubleClick }))) : null;
 }
 
 function Months(props) {
@@ -852,7 +854,9 @@ function Months(props) {
             _a["".concat(className, "-months")] = !!className,
             _a));
     }, [className]);
-    return (jsxs("div", __assign({ className: internalClassName }, { children: [locale.prefixMonths !== '' && (jsx("span", { children: locale.prefixMonths || DEFAULT_LOCALE_EN.prefixMonths }, void 0)), jsx(CustomSelect, { placeholder: locale.emptyMonths || DEFAULT_LOCALE_EN.emptyMonths, optionsList: optionsList, grid: false, value: value, unit: __assign(__assign({}, UNITS[3]), { alt: locale.altMonths || DEFAULT_LOCALE_EN.altMonths }), setValue: setValue, locale: locale, className: className, humanizeLabels: humanizeLabels, disabled: disabled, readOnly: readOnly, period: period, periodicityOnDoubleClick: periodicityOnDoubleClick }, void 0)] }), void 0));
+    return (React.createElement("div", { className: internalClassName },
+        locale.prefixMonths !== '' && (React.createElement("span", null, locale.prefixMonths || DEFAULT_LOCALE_EN.prefixMonths)),
+        React.createElement(CustomSelect, { placeholder: locale.emptyMonths || DEFAULT_LOCALE_EN.emptyMonths, optionsList: optionsList, grid: false, value: value, unit: __assign(__assign({}, UNITS[3]), { alt: locale.altMonths || DEFAULT_LOCALE_EN.altMonths }), setValue: setValue, locale: locale, className: className, humanizeLabels: humanizeLabels, disabled: disabled, readOnly: readOnly, period: period, periodicityOnDoubleClick: periodicityOnDoubleClick })));
 }
 
 function Hours(props) {
@@ -867,7 +871,9 @@ function Hours(props) {
             _a["".concat(className, "-hours")] = !!className,
             _a));
     }, [className]);
-    return (jsxs("div", __assign({ className: internalClassName }, { children: [locale.prefixHours !== '' && (jsx("span", { children: locale.prefixHours || DEFAULT_LOCALE_EN.prefixHours }, void 0)), jsx(CustomSelect, { placeholder: locale.emptyHours || DEFAULT_LOCALE_EN.emptyHours, value: value, unit: UNITS[1], setValue: setValue, locale: locale, className: className, disabled: disabled, readOnly: readOnly, leadingZero: leadingZero, clockFormat: clockFormat, period: period, periodicityOnDoubleClick: periodicityOnDoubleClick }, void 0)] }), void 0));
+    return (React.createElement("div", { className: internalClassName },
+        locale.prefixHours !== '' && (React.createElement("span", null, locale.prefixHours || DEFAULT_LOCALE_EN.prefixHours)),
+        React.createElement(CustomSelect, { placeholder: locale.emptyHours || DEFAULT_LOCALE_EN.emptyHours, value: value, unit: UNITS[1], setValue: setValue, locale: locale, className: className, disabled: disabled, readOnly: readOnly, leadingZero: leadingZero, clockFormat: clockFormat, period: period, periodicityOnDoubleClick: periodicityOnDoubleClick })));
 }
 
 function Minutes(props) {
@@ -882,14 +888,17 @@ function Minutes(props) {
             _a["".concat(className, "-minutes")] = !!className,
             _a));
     }, [className]);
-    return (jsxs("div", __assign({ className: internalClassName }, { children: [period === 'hour'
-                ? locale.prefixMinutesForHourPeriod !== '' && (jsx("span", { children: locale.prefixMinutesForHourPeriod ||
-                        DEFAULT_LOCALE_EN.prefixMinutesForHourPeriod }, void 0))
-                : locale.prefixMinutes !== '' && (jsx("span", { children: locale.prefixMinutes || DEFAULT_LOCALE_EN.prefixMinutes }, void 0)), jsx(CustomSelect, { placeholder: period === 'hour'
-                    ? locale.emptyMinutesForHourPeriod ||
-                        DEFAULT_LOCALE_EN.emptyMinutesForHourPeriod
-                    : locale.emptyMinutes || DEFAULT_LOCALE_EN.emptyMinutes, value: value, unit: UNITS[0], setValue: setValue, locale: locale, className: className, disabled: disabled, readOnly: readOnly, leadingZero: leadingZero, clockFormat: clockFormat, period: period, periodicityOnDoubleClick: periodicityOnDoubleClick }, void 0), period === 'hour' && locale.suffixMinutesForHourPeriod !== '' && (jsx("span", { children: locale.suffixMinutesForHourPeriod ||
-                    DEFAULT_LOCALE_EN.suffixMinutesForHourPeriod }, void 0))] }), void 0));
+    return (React.createElement("div", { className: internalClassName },
+        period === 'hour'
+            ? locale.prefixMinutesForHourPeriod !== '' && (React.createElement("span", null, locale.prefixMinutesForHourPeriod ||
+                DEFAULT_LOCALE_EN.prefixMinutesForHourPeriod))
+            : locale.prefixMinutes !== '' && (React.createElement("span", null, locale.prefixMinutes || DEFAULT_LOCALE_EN.prefixMinutes)),
+        React.createElement(CustomSelect, { placeholder: period === 'hour'
+                ? locale.emptyMinutesForHourPeriod ||
+                    DEFAULT_LOCALE_EN.emptyMinutesForHourPeriod
+                : locale.emptyMinutes || DEFAULT_LOCALE_EN.emptyMinutes, value: value, unit: UNITS[0], setValue: setValue, locale: locale, className: className, disabled: disabled, readOnly: readOnly, leadingZero: leadingZero, clockFormat: clockFormat, period: period, periodicityOnDoubleClick: periodicityOnDoubleClick }),
+        period === 'hour' && locale.suffixMinutesForHourPeriod !== '' && (React.createElement("span", null, locale.suffixMinutesForHourPeriod ||
+            DEFAULT_LOCALE_EN.suffixMinutesForHourPeriod))));
 }
 
 function WeekDays(props) {
@@ -921,11 +930,14 @@ function WeekDays(props) {
     var monthDaysIsDisplayed = !readOnly ||
         (monthDays && monthDays.length > 0) ||
         ((!monthDays || monthDays.length === 0) && (!value || value.length === 0));
-    return displayWeekDays ? (jsxs("div", __assign({ className: internalClassName }, { children: [locale.prefixWeekDays !== '' &&
-                (period === 'week' || !monthDaysIsDisplayed) && (jsx("span", { children: locale.prefixWeekDays || DEFAULT_LOCALE_EN.prefixWeekDays }, void 0)), locale.prefixWeekDaysForMonthAndYearPeriod !== '' &&
-                period !== 'week' &&
-                monthDaysIsDisplayed && (jsx("span", { children: locale.prefixWeekDaysForMonthAndYearPeriod ||
-                    DEFAULT_LOCALE_EN.prefixWeekDaysForMonthAndYearPeriod }, void 0)), jsx(CustomSelect, { placeholder: placeholder, optionsList: optionsList, grid: false, value: value, unit: __assign(__assign({}, UNITS[4]), { alt: locale.altWeekDays || DEFAULT_LOCALE_EN.altWeekDays }), setValue: setValue, locale: locale, className: className, humanizeLabels: humanizeLabels, disabled: disabled, readOnly: readOnly, period: period, periodicityOnDoubleClick: periodicityOnDoubleClick }, void 0)] }), void 0)) : null;
+    return displayWeekDays ? (React.createElement("div", { className: internalClassName },
+        locale.prefixWeekDays !== '' &&
+            (period === 'week' || !monthDaysIsDisplayed) && (React.createElement("span", null, locale.prefixWeekDays || DEFAULT_LOCALE_EN.prefixWeekDays)),
+        locale.prefixWeekDaysForMonthAndYearPeriod !== '' &&
+            period !== 'week' &&
+            monthDaysIsDisplayed && (React.createElement("span", null, locale.prefixWeekDaysForMonthAndYearPeriod ||
+            DEFAULT_LOCALE_EN.prefixWeekDaysForMonthAndYearPeriod)),
+        React.createElement(CustomSelect, { placeholder: placeholder, optionsList: optionsList, grid: false, value: value, unit: __assign(__assign({}, UNITS[4]), { alt: locale.altWeekDays || DEFAULT_LOCALE_EN.altWeekDays }), setValue: setValue, locale: locale, className: className, humanizeLabels: humanizeLabels, disabled: disabled, readOnly: readOnly, period: period, periodicityOnDoubleClick: periodicityOnDoubleClick }))) : null;
 }
 
 function Cron(props) {
@@ -1035,7 +1047,7 @@ function Cron(props) {
     var otherClearButtonPropsJSON = JSON.stringify(otherClearButtonProps);
     var clearButtonNode = useMemo(function () {
         if (clearButton && !readOnly) {
-            return (jsx(Button, __assign({ className: clearButtonClassName, danger: true, type: 'primary', disabled: disabled }, otherClearButtonProps, { onClick: handleClear }, { children: locale.clearButtonText || DEFAULT_LOCALE_EN.clearButtonText }), void 0));
+            return (React.createElement(Button, __assign({ className: clearButtonClassName, danger: true, type: 'primary', disabled: disabled }, otherClearButtonProps, { onClick: handleClear }), locale.clearButtonText || DEFAULT_LOCALE_EN.clearButtonText));
         }
         return null;
     }, [
@@ -1048,9 +1060,18 @@ function Cron(props) {
         handleClear,
     ]);
     var periodForRender = period || defaultPeriodRef.current;
-    return (jsxs("div", __assign({ className: internalClassName }, { children: [jsx(Period, { value: periodForRender, setValue: setPeriod, locale: locale, className: className, disabled: disabled, readOnly: readOnly, shortcuts: shortcuts }, void 0), periodForRender === 'reboot' ? (clearButtonNode) : (jsxs(Fragment, { children: [periodForRender === 'year' && (jsx(Months, { value: months, setValue: setMonths, locale: locale, className: className, humanizeLabels: humanizeLabels, disabled: disabled, readOnly: readOnly, period: periodForRender, periodicityOnDoubleClick: periodicityOnDoubleClick }, void 0)), (periodForRender === 'year' || periodForRender === 'month') && (jsx(MonthDays, { value: monthDays, setValue: setMonthDays, locale: locale, className: className, weekDays: weekDays, disabled: disabled, readOnly: readOnly, leadingZero: leadingZero, period: periodForRender, periodicityOnDoubleClick: periodicityOnDoubleClick }, void 0)), (periodForRender === 'year' ||
-                        periodForRender === 'month' ||
-                        periodForRender === 'week') && (jsx(WeekDays, { value: weekDays, setValue: setWeekDays, locale: locale, className: className, humanizeLabels: humanizeLabels, monthDays: monthDays, disabled: disabled, readOnly: readOnly, period: periodForRender, periodicityOnDoubleClick: periodicityOnDoubleClick }, void 0)), jsxs("div", { children: [periodForRender !== 'minute' && periodForRender !== 'hour' && (jsx(Hours, { value: hours, setValue: setHours, locale: locale, className: className, disabled: disabled, readOnly: readOnly, leadingZero: leadingZero, clockFormat: clockFormat, period: periodForRender, periodicityOnDoubleClick: periodicityOnDoubleClick }, void 0)), periodForRender !== 'minute' && (jsx(Minutes, { value: minutes, setValue: setMinutes, locale: locale, period: periodForRender, className: className, disabled: disabled, readOnly: readOnly, leadingZero: leadingZero, clockFormat: clockFormat, periodicityOnDoubleClick: periodicityOnDoubleClick }, void 0)), clearButtonNode] }, void 0)] }, void 0))] }), void 0));
+    return (React.createElement("div", { className: internalClassName },
+        React.createElement(Period, { value: periodForRender, setValue: setPeriod, locale: locale, className: className, disabled: disabled, readOnly: readOnly, shortcuts: shortcuts }),
+        periodForRender === 'reboot' ? (clearButtonNode) : (React.createElement(React.Fragment, null,
+            periodForRender === 'year' && (React.createElement(Months, { value: months, setValue: setMonths, locale: locale, className: className, humanizeLabels: humanizeLabels, disabled: disabled, readOnly: readOnly, period: periodForRender, periodicityOnDoubleClick: periodicityOnDoubleClick })),
+            (periodForRender === 'year' || periodForRender === 'month') && (React.createElement(MonthDays, { value: monthDays, setValue: setMonthDays, locale: locale, className: className, weekDays: weekDays, disabled: disabled, readOnly: readOnly, leadingZero: leadingZero, period: periodForRender, periodicityOnDoubleClick: periodicityOnDoubleClick })),
+            (periodForRender === 'year' ||
+                periodForRender === 'month' ||
+                periodForRender === 'week') && (React.createElement(WeekDays, { value: weekDays, setValue: setWeekDays, locale: locale, className: className, humanizeLabels: humanizeLabels, monthDays: monthDays, disabled: disabled, readOnly: readOnly, period: periodForRender, periodicityOnDoubleClick: periodicityOnDoubleClick })),
+            React.createElement("div", null,
+                periodForRender !== 'minute' && periodForRender !== 'hour' && (React.createElement(Hours, { value: hours, setValue: setHours, locale: locale, className: className, disabled: disabled, readOnly: readOnly, leadingZero: leadingZero, clockFormat: clockFormat, period: periodForRender, periodicityOnDoubleClick: periodicityOnDoubleClick })),
+                periodForRender !== 'minute' && (React.createElement(Minutes, { value: minutes, setValue: setMinutes, locale: locale, period: periodForRender, className: className, disabled: disabled, readOnly: readOnly, leadingZero: leadingZero, clockFormat: clockFormat, periodicityOnDoubleClick: periodicityOnDoubleClick })),
+                clearButtonNode)))));
 }
 
 export { Cron, Cron as default };
